@@ -11,8 +11,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    public String text;
-    public String tag;
+    private String text;
+    private String tag;
 
     public Message() {
 
