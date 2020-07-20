@@ -14,8 +14,8 @@ import java.util.Map;
 @Controller
 public class GreetingController {
     @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
+    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
+        model.put("name", name);
         return "greeting";
 
     }
@@ -24,9 +24,9 @@ public class GreetingController {
     private MessageRepo messageRepo;
 
     @GetMapping("/main")
-    public String main(Model model) {
+    public String main(Map<String, Object> model) {
         Iterable<Message> messages = messageRepo.findAll();
-        model.addAttribute("messages", messages.toString());
+        model.put("messages", messages);
         return "main";
     }
 
@@ -37,7 +37,7 @@ public class GreetingController {
         messageRepo.save(message);
 
         Iterable<Message> messages = messageRepo.findAll();
-        model.put("messages", messages.toString());
+        model.put("messages", messages);
 
         return "main";
     }
